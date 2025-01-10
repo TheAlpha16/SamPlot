@@ -1,0 +1,12 @@
+<svg width="400" height="100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:400");
+        </style>
+    </defs>
+    <style><![CDATA[svg text{stroke:none}]]></style>
+
+  <text x="80" y="70" font-size="60" font-family="Noto Sans">
+    <tspan fill="#00d7c9">Sam</tspan><tspan fill="#ff9b21">Plot</tspan>
+  </text>
+</svg>

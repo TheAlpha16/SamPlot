@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:SamPlot.ViewModels"
+    x:Class="SamPlot.Views.HomePage">
+
+    <HorizontalStackLayout
+        Spacing="20">
+
+        <Image
+            Source="welcome.png"
+            WidthRequest="800"
+            HorizontalOptions="FillAndExpand"/>
+
+        <StackLayout
+            VerticalOptions="Center"
+            Spacing="20">
+            <Label
+                Text="Welcome to SamPlot!"
+                FontSize="Title"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
+
+            <Button
+                Text="New Project"
+                Command="{Binding NavigateToPlotCommand}"/>
+
+            <Button
+                Text="Open Project"/>
+
+            <Button
+                Text="About"
+                Command="{Binding NavigateToAboutCommand}"/>
+
+        </StackLayout>
+
+    </HorizontalStackLayout>
+
+</ContentPage>

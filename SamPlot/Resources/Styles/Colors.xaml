@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="PrimaryBackgroundLight">#F1F2F4</Color>
+    <Color x:Key="SecondaryBackgroundLight">#DCDFE4</Color>
+    <Color x:Key="PrimaryTextLight">#333333</Color>
+    <Color x:Key="SecondaryTextLight">#666666</Color>
+    <Color x:Key="AccentColorLight">#2ABB7F</Color>
+    <Color x:Key="HighlightColorLight">#e68a1d</Color>
+    <Color x:Key="PlotBackgroundLight">#FFF8F9FB</Color>
+
+    <Color x:Key="PrimaryBackgroundDark">#22272B</Color>
+    <Color x:Key="SecondaryBackgroundDark">#2C333A</Color>
+    <Color x:Key="PrimaryTextDark">#e0e0e0</Color>
+    <Color x:Key="SecondaryTextDark">#b0b0b0</Color>
+    <Color x:Key="AccentColorDark">#1F845A</Color> 
+    <Color x:Key="HighlightColorDark">#ff9b21</Color>
+    <Color x:Key="PlotBackgroundDark">#FF2D2E2E</Color>
+
+    <!-- <SolidColorBrush
+        x:Key="PrimaryBackgroundBrush"
+        Color="{StaticResource PrimaryBackground}"/>
+    <SolidColorBrush
+        x:Key="SecondaryBackgroundBrush"
+        Color="{StaticResource SecondaryBackground}"/>
+    <SolidColorBrush
+        x:Key="PrimaryTextBrush"
+        Color="{StaticResource PrimaryText}"/>
+    <SolidColorBrush
+        x:Key="SecondaryTextBrush"
+        Color="{StaticResource SecondaryText}"/>
+    <SolidColorBrush
+        x:Key="AccentColorBrush"
+        Color="{StaticResource AccentColor}"/>
+    <SolidColorBrush
+        x:Key="HighlightColorBrush"
+        Color="{StaticResource HighlightColor}"/> -->
+
+</ResourceDictionary>
