@@ -39,6 +39,18 @@ public partial class NewFunctionDialog : ContentPage
             return;
         }
 
+        try
+        {
+            var engine = new Jace.CalculationEngine();
+            var testVars = new Dictionary<string, double> { { "x", 0 } };
+            engine.Calculate(FunctionEntry.Text.Trim(), testVars); // if this fails, it's invalid
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Invalid Function", $"Unable to parse or evaluate the function: {ex.Message}", "OK");
+            return;
+        }
+
         var plot = new PlotObject
         {
             Type = PlotType.Function,
