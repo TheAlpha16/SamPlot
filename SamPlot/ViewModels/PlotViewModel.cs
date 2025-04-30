@@ -78,7 +78,7 @@ public partial class PlotViewModel : ObservableObject
 
                 case PlotType.CSV:
                     var plt = _plotView.Plot.Add.Scatter(plotObject.Xs, plotObject.Ys);
-                    plt.LegendText = plotObject.FileName;
+                    plt.LegendText = plotObject.Label;
                     break;
             }
         }

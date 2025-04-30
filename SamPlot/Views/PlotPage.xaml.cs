@@ -69,7 +69,7 @@ public partial class PlotPage : ContentPage
 						Xs = xValues,
 						Ys = yValues,
 						Function = fileResult.FileName,
-						FileName = fileResult.FileName
+						Label = fileResult.FileName
 					};
 
 					_viewModel.PlotObjects.Add(plotObject);

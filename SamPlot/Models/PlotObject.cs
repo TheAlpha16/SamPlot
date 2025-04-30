@@ -13,7 +13,7 @@ public enum PlotType
 public partial class PlotObject
 {
     public Guid ID { get; } = Guid.NewGuid();
-    public string Function { get; set; } 
+    public string Function { get; set; }
     public double[]? WaveParams { get; set; }
 
     // public string Color { get; set; }
@@ -21,7 +21,7 @@ public partial class PlotObject
     public double[]? Xs { get; set; }
     public double[]? Ys { get; set; }
 
-    public string FileName { get; set; }
+    public string Label { get; set; }
 
     public PlotObject(PlotType plotType)
     {
@@ -39,8 +39,9 @@ public partial class PlotObject
         Function = $"{offset:F1} + {amplitude:F1} sin({2 * frequency:F1}πx + {phase:F1})";
     }
 
-    public PlotObject() {
-        Function = $"{FileName}";
+    public PlotObject()
+    {
+        Function = $"{Label}";
     }
 
     public double CalculateSin(double x)
