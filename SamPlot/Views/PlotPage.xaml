@@ -57,9 +57,13 @@
                 Spacing="10">
 
                 <Button
-                    Text="New"
+                    ImageSource="plus_icon.png"
                     Command="{Binding AddPlotCommand}"
-                    MinimumWidthRequest="180"/>
+                    WidthRequest="36"
+                    HeightRequest="36"
+                    BackgroundColor="Transparent"
+                    Padding="5"
+                    HorizontalOptions="Start"/>
 
                 <CollectionView ItemsSource="{Binding PlotObjects}">
                     <CollectionView.ItemTemplate>
@@ -69,20 +73,32 @@
                                 Padding="2"
                                 MaximumWidthRequest="180">
 
-                                <StackLayout
-                                    Orientation="Horizontal"
-                                    >
-                                    <Entry
-                                        Text="{Binding Function, Mode=TwoWay}"
-                                        Placeholder="Function"
-                                        HorizontalOptions="FillAndExpand"/>
+                                <StackLayout Orientation="Horizontal"
+                                             Padding="4"
+                                             Spacing="6"
+                                             HorizontalOptions="FillAndExpand">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PlotViewModel}}, Path=EditPlotCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                    </StackLayout.GestureRecognizers>
 
-                                    <Button
-                                        ImageSource="cross_icon.png"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PlotViewModel}}, Path=RemovePlotCommand}"
-                                        CommandParameter="{Binding .}"
-                                        BackgroundColor="Transparent"/>
+                                    <!-- Colored dot -->
+                                    <BoxView WidthRequest="10"
+                                             HeightRequest="10"
+                                             VerticalOptions="Center"
+                                             Color="Red"
+                                             CornerRadius="5"/>
+
+                                    <!-- Truncated label -->
+                                    <Label Text="{Binding Label}"
+                                           LineBreakMode="TailTruncation"
+                                           VerticalOptions="Center"
+                                           MaxLines="1"
+                                           HorizontalOptions="FillAndExpand"
+                                           TextColor="White"/>
                                 </StackLayout>
+
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
