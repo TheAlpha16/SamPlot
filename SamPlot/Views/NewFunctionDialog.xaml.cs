@@ -36,6 +36,8 @@ public partial class NewFunctionDialog : ContentPage
                 YLabelEntry.IsEnabled = false;
                 XStartEntry.IsEnabled = false;
                 XEndEntry.IsEnabled = false;
+                AddButton.IsEnabled = false;
+                LabelEntry.IsEnabled = false;
             }
         }
     }

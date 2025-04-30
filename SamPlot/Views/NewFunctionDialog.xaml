@@ -21,10 +21,14 @@
                      Keyboard="Numeric"/>
 
               <HorizontalStackLayout Spacing="10">
-                     <Button Text="Add"
-                             Clicked="OnAddClicked"/>
-                     <Button Text="Cancel"
-                             Clicked="OnCancelClicked"/>
+                     <Button
+                            x:Name="AddButton"
+                            Text="Add"
+                            Clicked="OnAddClicked"/>
+                     <Button
+                            x:Name="CancelButton"
+                            Text="Cancel"
+                            Clicked="OnCancelClicked"/>
                      <Button
                             x:Name="DeleteButton"
                             Text="Delete"
