@@ -51,7 +51,7 @@
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
 		<MauiImage Update="Resources\Images\welcome.png" Resize="True" />
 		<MauiImage Update="Resources\Images\samplot_icon.png" />
-		<MauiImage Update="Resources\Images\cross_icon.png" BaseSize="10,10"/>
+		<MauiImage Update="Resources\Images\cross_icon.png" BaseSize="10,10" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -62,9 +62,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="MathNet.Numerics" Version="5.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="NCalc" Version="1.3.8" />
 		<PackageReference Include="ScottPlot.Maui" Version="5.0.43" />
 	</ItemGroup>
 
