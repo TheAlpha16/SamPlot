@@ -87,7 +87,7 @@
                                     <BoxView WidthRequest="10"
                                              HeightRequest="10"
                                              VerticalOptions="Center"
-                                             Color="Red"
+                                             Color="{Binding PlotColorHex, FallbackValue=Gray}"
                                              CornerRadius="5"/>
 
                                     <!-- Truncated label -->

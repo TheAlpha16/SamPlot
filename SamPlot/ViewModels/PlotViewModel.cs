@@ -104,9 +104,18 @@ public partial class PlotViewModel : ObservableObject
                     double[] xs = Enumerable.Range(0, count)
                                             .Select(i => xStart + i * ((xEnd - xStart) / count))
                                             .ToArray();
+
+                    // DEBUG
                     Console.WriteLine("xs: " + string.Join(", ", xs));
+
                     double[] ys = xs.Select(x => plotObject.EvaluateFunction(x)).ToArray();
                     var funcPlot = _plotView.Plot.Add.Scatter(xs, ys);
+                    var assignedColor = funcPlot.LineStyle.Color;
+                    plotObject.PlotColorHex = assignedColor.ToHex();
+
+                    // DEBUG
+                    Console.WriteLine("Color: " + assignedColor.ToHex());
+
                     funcPlot.LegendText = plotObject.Label;
                     break;
 
