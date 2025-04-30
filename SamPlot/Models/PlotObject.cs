@@ -28,6 +28,10 @@ public partial class PlotObject
     public (double Start, double End)? XRange { get; set; }
     public string? PlotColorHex { get; set; }
 
+    public bool IsFittedCurve { get; set; } = false;
+    public PlotObject? OriginalReference { get; set; }
+
+
     public double EvaluateFunction(double x)
     {
         try

@@ -1,0 +1,22 @@
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SamPlot.Views.FitCurveDialog"
+    Title="Fit Curve">
+
+    <VerticalStackLayout Padding="20"
+            Spacing="15">
+        <Label Text="Model Equation (in terms of x, with parameters like a, b, c)"/>
+        <Entry x:Name="EquationEntry"
+                Placeholder="e.g., a * e^(-((x - b)^2) / (2 * c^2)) + d"/>
+
+        <Label Text="Initial Guesses (optional, e.g. a=1, b=0, c=1, d=0)"/>
+        <Entry x:Name="GuessesEntry"
+                Placeholder="a=1, b=0, c=1, d=0"/>
+
+        <Button Text="Fit Curve"
+                Clicked="OnFitClicked"/>
+        <Button Text="Cancel"
+                Clicked="OnCancelClicked"/>
+    </VerticalStackLayout>
+</ContentPage>

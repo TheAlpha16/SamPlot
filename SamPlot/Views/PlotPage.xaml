@@ -97,6 +97,17 @@
                                            MaxLines="1"
                                            HorizontalOptions="FillAndExpand"
                                            TextColor="White"/>
+                                    <Button
+                                        Text="Fit"
+                                        FontSize="12"
+                                        Padding="4"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:PlotViewModel}}, Path=FitPlotCommand}"
+                                        CommandParameter="{Binding .}"
+                                        HorizontalOptions="End"
+                                        BackgroundColor="DarkGreen"
+                                        TextColor="White"
+                                        WidthRequest="50"/>
+
                                 </StackLayout>
 
                             </StackLayout>

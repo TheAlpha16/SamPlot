@@ -4,6 +4,8 @@ using ScottPlot.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using SamPlot.Utilities;
+using Jace;
 
 namespace SamPlot.ViewModels;
 
@@ -15,6 +17,7 @@ public partial class PlotViewModel : ObservableObject
     public ICommand AddPlotCommand { get; }
     public ICommand RemovePlotCommand { get; }
     public ICommand EditPlotCommand { get; }
+    public ICommand FitPlotCommand { get; }
 
     public PlotViewModel(MauiPlot plot)
     {
@@ -22,6 +25,7 @@ public partial class PlotViewModel : ObservableObject
         AddPlotCommand = new Command(() => AddPlot());
         RemovePlotCommand = new Command<PlotObject>(RemovePlot);
         EditPlotCommand = new Command<PlotObject>(EditPlot);
+        FitPlotCommand = new Command<PlotObject>(async (plot) => await FitSelectedPlot(plot));
 
         InitializePlot();
         PlotObjects.CollectionChanged += PlotObjects_CollectionChanged;
@@ -88,6 +92,66 @@ public partial class PlotViewModel : ObservableObject
                 PlotObjects[index] = updatedPlot;
             }
         }
+    }
+
+    private async Task FitSelectedPlot(PlotObject sourcePlot)
+    {
+        if (sourcePlot.Xs == null || sourcePlot.Ys == null)
+            return;
+
+        var dialog = new FitCurveDialog();
+        await Application.Current.MainPage.Navigation.PushModalAsync(dialog);
+
+        var (equation, guessesRaw) = await dialog.ShowAsync();
+
+        if (string.IsNullOrWhiteSpace(equation))
+            return;
+
+        var parameters = CurveFittingParser.ExtractParameters(equation);
+
+        // DEBUG
+        Console.WriteLine("Parameters: " + string.Join(", ", parameters));
+
+        var initialGuesses = CurveFittingParser.ParseInitialGuesses(guessesRaw, parameters);
+
+        // DEBUG
+        Console.WriteLine("Initial Guesses: " + string.Join(", ", initialGuesses.Select(kvp => $"{kvp.Key}={kvp.Value}")));
+
+        var engine = new CalculationEngine();
+
+        // Early parse check
+        try
+        {
+            // Try evaluating once with dummy values to confirm syntax
+            var testVars = new Dictionary<string, double> { { "x", 0 } };
+            foreach (var param in initialGuesses)
+                testVars[param.Key] = param.Value;
+            engine.Calculate(equation, testVars);
+        }
+        catch (ParseException ex)
+        {
+            Console.WriteLine($"Equation parsing failed: {ex.Message}");
+            await Application.Current.MainPage.DisplayAlert("Parsing Error", ex.Message, "OK");
+
+            return;
+        }
+
+        var (fittedParams, fittedYs) = CurveFitter.Fit(sourcePlot.Xs, sourcePlot.Ys, equation, initialGuesses);
+
+        // DEBUG
+        Console.WriteLine("Fitted Parameters: " + string.Join(", ", fittedParams.Select(kvp => $"{kvp.Key}={kvp.Value}")));
+
+        var fitted = new PlotObject
+        {
+            Type = PlotType.Scatter,
+            Xs = sourcePlot.Xs,
+            Ys = fittedYs,
+            Label = sourcePlot.Label + " (Fit)",
+            IsFittedCurve = true,
+            OriginalReference = sourcePlot
+        };
+
+        PlotObjects.Add(fitted);
     }
 
     public void PlotObjects_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
