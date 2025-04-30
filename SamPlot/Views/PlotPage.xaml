@@ -57,7 +57,7 @@
                 Spacing="10">
 
                 <Button
-                    Text="New Plot"
+                    Text="New"
                     Command="{Binding AddPlotCommand}"
                     MinimumWidthRequest="180"/>
 
