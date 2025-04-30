@@ -14,12 +14,14 @@ public partial class PlotViewModel : ObservableObject
 
     public ICommand AddPlotCommand { get; }
     public ICommand RemovePlotCommand { get; }
+    public ICommand EditPlotCommand { get; }
 
     public PlotViewModel(MauiPlot plot)
     {
         _plotView = plot;
         AddPlotCommand = new Command(() => AddPlot());
         RemovePlotCommand = new Command<PlotObject>(RemovePlot);
+        EditPlotCommand = new Command<PlotObject>(EditPlot);
 
         InitializePlot();
         PlotObjects.CollectionChanged += PlotObjects_CollectionChanged;
@@ -62,6 +64,23 @@ public partial class PlotViewModel : ObservableObject
         if (plotObject != null && PlotObjects.Contains(plotObject))
         {
             PlotObjects.Remove(plotObject);
+        }
+    }
+
+    public async void EditPlot(PlotObject plot)
+    {
+        var dialog = new NewFunctionDialog(plot);
+        await Application.Current.MainPage.Navigation.PushModalAsync(dialog);
+
+        var updatedPlot = await dialog.ShowAsync();
+
+        if (updatedPlot != null)
+        {
+            var index = PlotObjects.IndexOf(plot);
+            if (index >= 0)
+            {
+                PlotObjects[index] = updatedPlot;
+            }
         }
     }
 

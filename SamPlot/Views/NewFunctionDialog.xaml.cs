@@ -5,10 +5,25 @@ namespace SamPlot.Views;
 public partial class NewFunctionDialog : ContentPage
 {
     private TaskCompletionSource<PlotObject?> _tcs = new();
+    private PlotObject? _existingPlot;
 
-    public NewFunctionDialog()
+    public NewFunctionDialog(PlotObject? plot = null)
     {
         InitializeComponent();
+        _existingPlot = plot;
+
+        if (_existingPlot != null)
+        {
+            FunctionEntry.Text = _existingPlot.Function;
+            LabelEntry.Text = _existingPlot.Label;
+            XLabelEntry.Text = _existingPlot.XLabel;
+            YLabelEntry.Text = _existingPlot.YLabel;
+            if (_existingPlot.XRange.HasValue)
+            {
+                XStartEntry.Text = _existingPlot.XRange.Value.Start.ToString();
+                XEndEntry.Text = _existingPlot.XRange.Value.End.ToString();
+            }
+        }
     }
 
     public Task<PlotObject?> ShowAsync() => _tcs.Task;
