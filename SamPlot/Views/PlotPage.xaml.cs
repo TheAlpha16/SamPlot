@@ -17,16 +17,6 @@ public partial class PlotPage : ContentPage
 		_viewModel = new PlotViewModel(PlotView);
 		BindingContext = _viewModel;
 
-		// Microsoft.Maui.Graphics.Color plotBackgroundColor =
-		// 	Application.Current.RequestedTheme == AppTheme.Dark
-		// 	? (Microsoft.Maui.Graphics.Color)Application.Current.Resources["PlotBackgroundDark"]
-		// 	: (Microsoft.Maui.Graphics.Color)Application.Current.Resources["PlotBackgroundLight"];
-
-		// Microsoft.Maui.Graphics.Color axesColor =
-		// 	Application.Current.RequestedTheme == AppTheme.Dark
-		// 	? (Microsoft.Maui.Graphics.Color)Application.Current.Resources["PrimaryTextDark"]
-		// 	: (Microsoft.Maui.Graphics.Color)Application.Current.Resources["PrimaryTextLight"];
-
 		Shell.SetBackButtonBehavior(
 			this, new BackButtonBehavior
 			{
