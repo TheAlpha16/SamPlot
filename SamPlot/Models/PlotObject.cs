@@ -21,7 +21,27 @@ public partial class PlotObject
     public double[]? Xs { get; set; }
     public double[]? Ys { get; set; }
 
-    public string Label { get; set; }
+    public string? Label { get; set; }
+
+    public string? XLabel { get; set; }
+    public string? YLabel { get; set; }
+    public (double Start, double End)? XRange { get; set; }
+
+    public double EvaluateFunction(double x)
+    {
+        try
+        {
+            var engine = new Jace.CalculationEngine();
+            var variables = new Dictionary<string, double> { { "x", x } };
+
+            return engine.Calculate(Function, variables);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error evaluating function '{Function}' at x={x}: {ex.Message}");
+            return double.NaN;
+        }
+    }
 
     public PlotObject(PlotType plotType)
     {

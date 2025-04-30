@@ -1,0 +1,30 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SamPlot.Views.NewFunctionDialog"
+             Title="Add Function Plot">
+
+    <VerticalStackLayout Padding="20"
+                         Spacing="15">
+        <Entry x:Name="FunctionEntry"
+               Placeholder="Function (e.g. sin(pi * x) + x)"/>
+        <Entry x:Name="LabelEntry"
+               Placeholder="Plot Label (e.g. My Curve)"/>
+        <Entry x:Name="XLabelEntry"
+               Placeholder="X Axis Label (optional)"/>
+        <Entry x:Name="YLabelEntry"
+               Placeholder="Y Axis Label (optional)"/>
+        <Entry x:Name="XStartEntry"
+               Placeholder="X Start (e.g. -10)"
+               Keyboard="Numeric"/>
+        <Entry x:Name="XEndEntry"
+               Placeholder="X End (e.g. 10)"
+               Keyboard="Numeric"/>
+
+        <HorizontalStackLayout Spacing="10">
+            <Button Text="Add"
+                    Clicked="OnAddClicked"/>
+            <Button Text="Cancel"
+                    Clicked="OnCancelClicked"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
