@@ -6,6 +6,8 @@ public partial class NewFunctionDialog : ContentPage
 {
     private TaskCompletionSource<PlotObject?> _tcs = new();
     private PlotObject? _existingPlot;
+    public bool WasDeleted { get; private set; } = false;
+
 
     public NewFunctionDialog(PlotObject? plot = null)
     {
@@ -14,14 +16,26 @@ public partial class NewFunctionDialog : ContentPage
 
         if (_existingPlot != null)
         {
+            DeleteButton.IsVisible = true;
+
             FunctionEntry.Text = _existingPlot.Function;
             LabelEntry.Text = _existingPlot.Label;
             XLabelEntry.Text = _existingPlot.XLabel;
             YLabelEntry.Text = _existingPlot.YLabel;
+
             if (_existingPlot.XRange.HasValue)
             {
                 XStartEntry.Text = _existingPlot.XRange.Value.Start.ToString();
                 XEndEntry.Text = _existingPlot.XRange.Value.End.ToString();
+            }
+
+            if (_existingPlot.Type == PlotType.CSV)
+            {
+                FunctionEntry.IsEnabled = false;
+                XLabelEntry.IsEnabled = false;
+                YLabelEntry.IsEnabled = false;
+                XStartEntry.IsEnabled = false;
+                XEndEntry.IsEnabled = false;
             }
         }
     }
@@ -68,6 +82,13 @@ public partial class NewFunctionDialog : ContentPage
     private void OnCancelClicked(object sender, EventArgs e)
     {
         _tcs.SetResult(null);
+        Navigation.PopModalAsync();
+    }
+
+    private void OnDeleteClicked(object sender, EventArgs e)
+    {
+        WasDeleted = true;
+        _tcs.SetResult(null); 
         Navigation.PopModalAsync();
     }
 }

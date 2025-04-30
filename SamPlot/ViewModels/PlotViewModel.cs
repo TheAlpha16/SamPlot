@@ -74,6 +74,12 @@ public partial class PlotViewModel : ObservableObject
 
         var updatedPlot = await dialog.ShowAsync();
 
+        if (dialog.WasDeleted)
+        {
+            PlotObjects.Remove(plot);
+            return;
+        }
+
         if (updatedPlot != null)
         {
             var index = PlotObjects.IndexOf(plot);
