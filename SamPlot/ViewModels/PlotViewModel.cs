@@ -111,27 +111,25 @@ public partial class PlotViewModel : ObservableObject
                                             .Select(i => xStart + i * ((xEnd - xStart) / count))
                                             .ToArray();
 
-                    // DEBUG
-                    Console.WriteLine("xs: " + string.Join(", ", xs));
-
                     double[] ys = xs.Select(x => plotObject.EvaluateFunction(x)).ToArray();
                     var funcPlot = _plotView.Plot.Add.Scatter(xs, ys);
-                    var assignedColor = funcPlot.LineStyle.Color;
-                    plotObject.PlotColorHex = assignedColor.ToHex();
+                    plotObject.PlotColorHex = funcPlot.LineStyle.Color.ToHex();
 
                     // DEBUG
-                    Console.WriteLine("Color: " + assignedColor.ToHex());
+                    Console.WriteLine("Label: " + plotObject.Function + "Color: " + plotObject.PlotColorHex);
 
                     funcPlot.LegendText = plotObject.Label;
                     break;
 
                 case PlotType.Scatter:
-                    _plotView.Plot.Add.Scatter(plotObject.Xs, plotObject.Ys);
+                    var scatterPlot = _plotView.Plot.Add.Scatter(plotObject.Xs, plotObject.Ys);
+                    plotObject.PlotColorHex = scatterPlot.LineStyle.Color.ToHex();
                     break;
 
                 case PlotType.CSV:
                     var plt = _plotView.Plot.Add.Scatter(plotObject.Xs, plotObject.Ys);
                     plt.LegendText = plotObject.Label;
+                    plotObject.PlotColorHex = plt.LineStyle.Color.ToHex();
                     break;
             }
         }
