@@ -6,6 +6,8 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using SamPlot.Utilities;
 using Jace;
+using Microsoft.Maui.Controls.Shapes;
+using ScottPlot;
 
 namespace SamPlot.ViewModels;
 
@@ -146,12 +148,21 @@ public partial class PlotViewModel : ObservableObject
             Type = PlotType.Scatter,
             Xs = sourcePlot.Xs,
             Ys = fittedYs,
-            Label = sourcePlot.Label + " (Fit)",
+            Label = "[FIT] " + sourcePlot.Label,
+            Function = string.Join(", ", fittedParams.Select(kvp => $"{kvp.Key}={kvp.Value:F4}")),
             IsFittedCurve = true,
             OriginalReference = sourcePlot
         };
 
+        fitted.PlotColorHex = sourcePlot.PlotColorHex;
         PlotObjects.Add(fitted);
+
+        // Display them
+        await Application.Current.MainPage.DisplayAlert(
+            "Fitted Parameters",
+            string.Join(Environment.NewLine, fittedParams.Select(kvp => $"{kvp.Key}: {kvp.Value:F4}")),
+            "OK"
+        );
     }
 
     public void PlotObjects_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -187,6 +198,7 @@ public partial class PlotViewModel : ObservableObject
 
                 case PlotType.Scatter:
                     var scatterPlot = _plotView.Plot.Add.Scatter(plotObject.Xs, plotObject.Ys);
+                    if (plotObject.IsFittedCurve) scatterPlot.LinePattern = LinePattern.Dotted;
                     plotObject.PlotColorHex = scatterPlot.LineStyle.Color.ToHex();
                     break;
 
