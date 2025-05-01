@@ -67,7 +67,7 @@ public static class CurveFitter
                 initial[i] = 1.0;
         }
 
-        var nm = new NelderMeadSimplex(1e-5, 10000);
+        var nm = new NelderMeadSimplex(1e-5, 100000000);
         var result = nm.FindMinimum(ObjectiveFunction.Value(cost), initial);
         var finalParams = result.MinimizingPoint.ToArray();
 
