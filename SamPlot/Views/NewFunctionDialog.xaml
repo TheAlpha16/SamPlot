@@ -37,6 +37,11 @@
                             Clicked="OnDeleteClicked"
                             IsVisible="False"
                             Padding="6"/>
+                     <Button
+                            x:Name="ExportButton"
+                            Text="Export CSV"
+                            Clicked="OnExportClicked"
+                            Padding="6"/>
 
               </HorizontalStackLayout>
        </VerticalStackLayout>
